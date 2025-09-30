@@ -3,7 +3,7 @@
   "name": "deployhq",
   "title": "DeployHQ",
   "description": "",
-  "icon": "extension-icon.png",
+  "icon": "icon-deployhq.png",
   "author": "Scummo",
   "platforms": [
     "macOS",
@@ -21,9 +21,23 @@
   "preferences": [
     {
       "name": "DeployHQAPIKey",
-      "type": "password",
       "title": "DeployHQ API Key",
+      "type": "password",
       "description": "Enter your secret DeployHQ API key",
+      "required": true
+    },
+    {
+      "name": "DeployHQAccountName",
+      "title": "DeployHQ Account Name",
+      "type": "textfield",
+      "description": "Enter your DeployHQ Account Name (Company name/ Subdomain)",
+      "required": true
+    },
+    {
+      "name": "DeployHQUsername",
+      "title": "DeployHQ Username",
+      "type": "textfield",
+      "description": "Enter your DeployHQ Username (Email address)",
       "required": true
     }
   ],
