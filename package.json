@@ -13,8 +13,8 @@
   "commands": [
     {
       "name": "search-projects",
-      "title": "Search in projects",
-      "description": "Search for projects in DeployH",
+      "title": "Search Projects",
+      "description": "Search for projects in DeployHQ",
       "mode": "view"
     }
   ],
@@ -28,17 +28,35 @@
     },
     {
       "name": "DeployHQAccountName",
-      "title": "DeployHQ Account Name",
+      "title": "DeployHQ Account Name (Company name/ Subdomain)",
       "type": "textfield",
       "description": "Enter your DeployHQ Account Name (Company name/ Subdomain)",
       "required": true
     },
     {
       "name": "DeployHQUsername",
-      "title": "DeployHQ Username",
+      "title": "DeployHQ Username (Your email address)",
       "type": "textfield",
       "description": "Enter your DeployHQ Username (Email address)",
       "required": true
+    },
+    {
+      "name": "defaultAction",
+      "title": "Default Action",
+      "description": "Action to perform when interacting with a project-item",
+      "type": "dropdown",
+      "required": false,
+      "default": "visit-project",
+      "data": [
+        {
+          "title": "Visit Project",
+          "value": "visit-project"
+        },
+        {
+          "title": "Visit Repository",
+          "value": "visit-repository"
+        }
+      ]
     }
   ],
   "dependencies": {
