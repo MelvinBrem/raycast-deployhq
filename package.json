@@ -2,7 +2,7 @@
   "$schema": "https://www.raycast.com/schemas/extension.json",
   "name": "deployhq",
   "title": "DeployHQ",
-  "description": "",
+  "description": "Do stuff with DeployHQ things",
   "icon": "icon-deployhq.png",
   "author": "Scummo",
   "platforms": [
@@ -57,6 +57,14 @@
           "value": "visit-repository"
         }
       ]
+    },
+    {
+      "name": "logPath",
+      "title": "Log Path",
+      "description": "Path to where Winston will save the logs",
+      "type": "textfield",
+      "required": false,
+      "default": ""
     }
   ],
   "dependencies": {
@@ -69,7 +77,8 @@
     "@types/react": "19.0.10",
     "eslint": "^9.22.0",
     "prettier": "^3.5.3",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.2",
+    "winston": "^3.18.3"
   },
   "scripts": {
     "build": "ray build",

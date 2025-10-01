@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
 import { getPreferenceValues, List, Action, ActionPanel } from "@raycast/api";
-import Logger from "./classes/Logger";
-import { Project, Repository } from "./lib/interfaces";
+import { Project } from "./lib/interfaces";
+import { logger } from "./utils/logger";
 
-const preferences = getPreferenceValues<Preferences>();
-const logger = new Logger("~/projects/raycast/deployhq/", "deployhq.log");
-
+const preferences: Preferences = getPreferenceValues<Preferences>();
 interface State {
   items?: Project[];
 }
@@ -23,8 +21,10 @@ export default function Command() {
           },
         });
         const projectData = (await response.json()) as any[];
+        logger.debug(projectData);
 
         if (response.status > 200 || projectData.length === 0) {
+          logger.error("Error fetching projects: " + JSON.stringify(response, null, 2));
           throw new Error("Error fetching projects");
         }
 
@@ -40,13 +40,10 @@ export default function Command() {
   }, []);
 
   return (
-    <List isLoading={state.items?.length === 0}>
-      {state.items?.map(
-        (item) => (
-          logger.log(item),
-          (<List.Item key={item.identifier} title={item.name} actions={projectActions(item)} />)
-        ),
-      )}
+    <List throttle={true} isLoading={state.items === undefined}>
+      {state.items?.map((item) => (
+        <List.Item key={item.identifier} title={item.name} actions={projectActions(item)} />
+      ))}
     </List>
   );
 }
@@ -55,11 +52,11 @@ function projectActions(item: Project) {
   return (
     <ActionPanel>
       <Action.OpenInBrowser
-        title="Visit Project"
+        title="Open Project in browser"
         url={"https://" + preferences.DeployHQAccountName + ".deployhq.com/projects/" + item.permalink}
       />
       {item.repository?.hosting_service?.tree_url && (
-        <Action.OpenInBrowser title="Visit Repository" url={item.repository.hosting_service.tree_url} />
+        <Action.OpenInBrowser title="Open Repository in browser" url={item.repository.hosting_service.tree_url} />
       )}
     </ActionPanel>
   );
