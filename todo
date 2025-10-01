@@ -1,0 +1,2 @@
+- [] Implement caching using the Etag response header as an content identifier
+- [] Actually use the defaultAction preference to define the default action

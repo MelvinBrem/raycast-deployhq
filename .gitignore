@@ -15,4 +15,3 @@ compiled_raycast_rust
 *.log
 /logs
 .env
-todo
