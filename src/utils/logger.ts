@@ -20,20 +20,18 @@ class Logger {
     Logger.instance = winston.createLogger({
       level: "info",
       format: winston.format.combine(winston.format.timestamp(), winston.format.prettyPrint()),
-      transports: [
-        new winston.transports.File({
-          filename: `${Logger.logPath}${Logger.logFilename}-debug.log`,
-          level: "debug",
-        }),
-        new winston.transports.File({
-          filename: `${Logger.logPath}${Logger.logFilename}-info.log`,
-          level: "info",
-        }),
-        new winston.transports.File({
-          filename: `${Logger.logPath}${Logger.logFilename}-error.log`,
-          level: "error",
-        }),
-      ],
+      transports: !environment.isDevelopment
+        ? [
+            new winston.transports.Console({
+              format: winston.format.simple(),
+            }),
+          ]
+        : [
+            new winston.transports.File({
+              filename: `${Logger.logPath}${Logger.logFilename}.log`,
+              level: "debug",
+            }),
+          ],
     });
     return Logger.instance;
   }

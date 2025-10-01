@@ -1,39 +1,37 @@
 import { useEffect, useState } from "react";
-import { getPreferenceValues, List, Action, ActionPanel } from "@raycast/api";
+import { getPreferenceValues, List, Action, ActionPanel, environment } from "@raycast/api";
 import { Project } from "./lib/interfaces";
 import { logger } from "./utils/logger";
+import ApiClient from "./services/ApiClient";
 
 const preferences: Preferences = getPreferenceValues<Preferences>();
+const apiClient = new ApiClient(
+  "https://" + preferences.DeployHQAccountName + ".deployhq.com",
+  preferences.DeployHQAPIKey,
+  preferences.DeployHQUsername,
+  preferences.DeployHQAccountName,
+);
+
 interface State {
   items?: Project[];
 }
 
 export default function Command() {
   const [state, setState] = useState<State>({});
-  const url = "https://" + preferences.DeployHQAccountName + ".deployhq.com/projects";
 
   useEffect(() => {
     async function fetchProjects() {
-      try {
-        const response = await fetch(url, {
-          headers: {
-            Authorization: "Basic " + btoa(preferences.DeployHQUsername + ":" + preferences.DeployHQAPIKey),
-          },
-        });
-        const projectData = (await response.json()) as any[];
-        logger.debug(projectData);
+      const result = await apiClient.call("/projects");
+      const projectData = result.data as Project[];
 
-        if (response.status > 200 || projectData.length === 0) {
-          logger.error("Error fetching projects: " + JSON.stringify(response, null, 2));
-          throw new Error("Error fetching projects");
-        }
-
-        setState({
-          items: projectData,
-        });
-      } catch (error) {
-        throw error;
+      if (projectData.length === 0) {
+        if (environment.isDevelopment) logger.error("No projects found");
+        throw new Error("No projects found");
       }
+
+      setState({
+        items: projectData,
+      });
     }
 
     fetchProjects();

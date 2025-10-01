@@ -1,0 +1,46 @@
+import { environment } from "@raycast/api";
+import { logger } from "../utils/logger";
+
+/**
+ * API class to handle all API calls to DeployHQ
+ * https://www.deployhq.com/support/api
+ */
+export default class ApiClient {
+  private readonly baseURL: string;
+  private readonly apiKey: string;
+  private readonly username: string;
+  private readonly accountName: string;
+  private readonly headerAuth: string;
+
+  constructor(baseURL: string, apiKey: string, username: string, accountName: string) {
+    this.baseURL = baseURL;
+    this.apiKey = apiKey;
+    this.username = username;
+    this.accountName = accountName;
+    this.headerAuth = `Basic ${btoa(`${this.username}:${this.apiKey}`)}`;
+  }
+
+  public async call(url: string): Promise<{ data: any; headers: Record<string, string> }> {
+    try {
+      const response = await fetch(this.baseURL + url, {
+        headers: {
+          Authorization: this.headerAuth,
+        },
+      });
+      const data = await response.json();
+
+      const headers: Record<string, string> = {};
+      response.headers.forEach((value, key) => {
+        headers[key] = value;
+      });
+
+      return {
+        data,
+        headers,
+      };
+    } catch (error) {
+      if (environment.isDevelopment) logger.error("Error fetching projects:", error);
+      throw error;
+    }
+  }
+}
