@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getPreferenceValues, List, Action, ActionPanel, environment } from "@raycast/api";
 import { Project } from "./lib/interfaces";
-import { logger } from "./utils/logger";
+import { Logger } from "./utils/LoggerSingleton";
 import ApiClient from "./services/ApiClient";
 
 const preferences: Preferences = getPreferenceValues<Preferences>();
@@ -25,7 +25,7 @@ export default function Command() {
       const projectData = result.data as Project[];
 
       if (projectData.length === 0) {
-        if (environment.isDevelopment) logger.error("No projects found");
+        if (environment.isDevelopment) Logger.error("No projects found");
         throw new Error("No projects found");
       }
 

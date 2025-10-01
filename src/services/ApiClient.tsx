@@ -1,5 +1,5 @@
 import { environment } from "@raycast/api";
-import { logger } from "../utils/logger";
+import { Logger } from "../utils/LoggerSingleton";
 import { Project } from "../lib/interfaces";
 
 /**
@@ -40,7 +40,7 @@ export default class ApiClient {
         headers,
       };
     } catch (error) {
-      if (environment.isDevelopment) logger.error("Error fetching projects:", error);
+      if (environment.isDevelopment) Logger.error("Error fetching projects:", error);
       throw error;
     }
   }

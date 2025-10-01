@@ -1,7 +1,7 @@
 {
   "$schema": "https://www.raycast.com/schemas/extension.json",
   "name": "deployhq",
-  "title": "DeployHQ",
+  "title": "Deployhq",
   "description": "Do stuff with DeployHQ things",
   "icon": "icon-deployhq.png",
   "author": "MelvinBrem",

@@ -2,22 +2,22 @@ import winston from "winston";
 import { homedir } from "os";
 import { environment, getPreferenceValues } from "@raycast/api";
 
-class Logger {
+class LoggerSingleton {
   private static instance: winston.Logger | null = null;
   private static logPath: string;
   private static logFilename: string;
 
   static getInstance(): winston.Logger {
-    if (Logger.instance !== null) return Logger.instance;
+    if (LoggerSingleton.instance !== null) return LoggerSingleton.instance;
 
     const preferences = getPreferenceValues<Preferences>();
-    Logger.logPath = preferences.logPath.startsWith("~")
+    LoggerSingleton.logPath = preferences.logPath.startsWith("~")
       ? preferences.logPath.replace("~", homedir())
       : preferences.logPath;
 
-    Logger.logFilename = "raycast-deployhq";
+    LoggerSingleton.logFilename = "raycast-deployhq";
 
-    Logger.instance = winston.createLogger({
+    LoggerSingleton.instance = winston.createLogger({
       level: "info",
       format: winston.format.combine(winston.format.timestamp(), winston.format.prettyPrint()),
       transports: !environment.isDevelopment
@@ -28,13 +28,13 @@ class Logger {
           ]
         : [
             new winston.transports.File({
-              filename: `${Logger.logPath}${Logger.logFilename}.log`,
+              filename: `${LoggerSingleton.logPath}${LoggerSingleton.logFilename}.log`,
               level: "debug",
             }),
           ],
     });
-    return Logger.instance;
+    return LoggerSingleton.instance;
   }
 }
 
-export const logger = Logger.getInstance();
+export const Logger = LoggerSingleton.getInstance();
