@@ -6,10 +6,10 @@ import ApiClient from "./services/ApiClient";
 
 const preferences: Preferences = getPreferenceValues<Preferences>();
 const apiClient = new ApiClient(
-  "https://" + preferences.DeployHQAccountName + ".deployhq.com",
-  preferences.DeployHQAPIKey,
-  preferences.DeployHQUsername,
-  preferences.DeployHQAccountName,
+  "https://" + preferences.deployHQAccountName + ".deployhq.com",
+  preferences.deployHQAPIKey,
+  preferences.deployHQUsername,
+  preferences.deployHQAccountName,
 );
 
 interface State {
@@ -50,11 +50,11 @@ function projectActions(item: Project) {
   return (
     <ActionPanel>
       <Action.OpenInBrowser
-        title="Open Project in browser"
-        url={"https://" + preferences.DeployHQAccountName + ".deployhq.com/projects/" + item.permalink}
+        title="Open Project in Browser"
+        url={"https://" + preferences.deployHQAccountName + ".deployhq.com/projects/" + item.permalink}
       />
       {item.repository?.hosting_service?.tree_url && (
-        <Action.OpenInBrowser title="Open Repository in browser" url={item.repository.hosting_service.tree_url} />
+        <Action.OpenInBrowser title="Open Repository in Browser" url={item.repository.hosting_service.tree_url} />
       )}
     </ActionPanel>
   );

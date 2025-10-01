@@ -1,5 +1,6 @@
 import { environment } from "@raycast/api";
 import { logger } from "../utils/logger";
+import { Project } from "../lib/interfaces";
 
 /**
  * API class to handle all API calls to DeployHQ
@@ -20,14 +21,14 @@ export default class ApiClient {
     this.headerAuth = `Basic ${btoa(`${this.username}:${this.apiKey}`)}`;
   }
 
-  public async call(url: string): Promise<{ data: any; headers: Record<string, string> }> {
+  public async call(url: string): Promise<{ data: Array<Project>; headers: Record<string, string> }> {
     try {
       const response = await fetch(this.baseURL + url, {
         headers: {
           Authorization: this.headerAuth,
         },
       });
-      const data = await response.json();
+      const data = (await response.json()) as Array<Project>;
 
       const headers: Record<string, string> = {};
       response.headers.forEach((value, key) => {

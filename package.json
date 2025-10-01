@@ -20,21 +20,21 @@
   ],
   "preferences": [
     {
-      "name": "DeployHQAPIKey",
+      "name": "deployHQAPIKey",
       "title": "DeployHQ API Key",
       "type": "password",
       "description": "Enter your secret DeployHQ API key",
       "required": true
     },
     {
-      "name": "DeployHQAccountName",
+      "name": "deployHQAccountName",
       "title": "DeployHQ Account Name (Company name/ Subdomain)",
       "type": "textfield",
       "description": "Enter your DeployHQ Account Name (Company name/ Subdomain)",
       "required": true
     },
     {
-      "name": "DeployHQUsername",
+      "name": "deployHQUsername",
       "title": "DeployHQ Username (Your email address)",
       "type": "textfield",
       "description": "Enter your DeployHQ Username (Email address)",
