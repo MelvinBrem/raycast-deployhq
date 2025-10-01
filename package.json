@@ -4,7 +4,7 @@
   "title": "DeployHQ",
   "description": "Do stuff with DeployHQ things",
   "icon": "icon-deployhq.png",
-  "author": "Scummo",
+  "author": "MelvinBrem",
   "platforms": [
     "macOS",
     "Windows"
@@ -12,7 +12,7 @@
   "license": "MIT",
   "commands": [
     {
-      "name": "search-projects",
+      "name": "searchProjects",
       "title": "Search Projects",
       "description": "Search for projects in DeployHQ",
       "mode": "view"
@@ -43,7 +43,7 @@
     {
       "name": "defaultAction",
       "title": "Default Action",
-      "description": "Action to perform when interacting with a project-item",
+      "description": "The default action to perform when interacting with a project-item",
       "type": "dropdown",
       "required": false,
       "default": "visit-project",
