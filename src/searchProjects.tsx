@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useCachedPromise } from "@raycast/utils";
 import { getPreferenceValues, List, Action, ActionPanel, environment } from "@raycast/api";
 import { Project } from "./lib/interfaces";
 import { Logger } from "./utils/LoggerSingleton";
@@ -19,14 +20,14 @@ interface State {
 export default function Command() {
   const [state, setState] = useState<State>({});
 
-  useEffect(() => {
+  useCachedPromise(async () => {
     async function fetchProjects() {
       const result = await apiClient.call("/projects");
       const projectData = result.data as Project[];
 
       if (projectData.length === 0) {
         if (environment.isDevelopment) Logger.error("No projects found");
-        throw new Error("No projects found");
+        return [];
       }
 
       setState({
