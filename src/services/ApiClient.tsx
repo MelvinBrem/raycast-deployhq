@@ -28,6 +28,13 @@ export default class ApiClient {
           Authorization: this.headerAuth,
         },
       });
+      if (response.status !== 200) {
+        Logger.error("Error fetching projects:", response.statusText);
+        return {
+          data: [],
+          headers: {},
+        };
+      }
       const data = (await response.json()) as Array<Project>;
 
       const headers: Record<string, string> = {};
