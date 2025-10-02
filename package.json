@@ -1,8 +1,8 @@
 {
   "$schema": "https://www.raycast.com/schemas/extension.json",
   "name": "deployhq",
-  "title": "Deployhq",
-  "description": "Do stuff with DeployHQ things",
+  "title": "DeployHQ",
+  "description": "Search and navigate to your DeployHQ projects",
   "icon": "icon-deployhq.png",
   "author": "MelvinBrem",
   "platforms": [
@@ -28,16 +28,16 @@
     },
     {
       "name": "deployHQAccountName",
-      "title": "DeployHQ Account Name (Company name/ Subdomain)",
+      "title": "DeployHQ Account Name (Company Name/ Subdomain)",
       "type": "textfield",
-      "description": "Enter your DeployHQ Account Name (Company name/ Subdomain)",
+      "description": "Enter your DeployHQ Account Name (Company Name/ Subdomain)",
       "required": true
     },
     {
       "name": "deployHQUsername",
-      "title": "DeployHQ Username (Your email address)",
+      "title": "DeployHQ Username (Your Email Address)",
       "type": "textfield",
-      "description": "Enter your DeployHQ Username (Email address)",
+      "description": "Enter your DeployHQ Username (Email Address)",
       "required": true
     },
     {
@@ -69,7 +69,8 @@
   ],
   "dependencies": {
     "@raycast/api": "^1.103.2",
-    "@raycast/utils": "^1.17.0"
+    "@raycast/utils": "^1.17.0",
+    "winston": "^3.18.3"
   },
   "devDependencies": {
     "@raycast/eslint-config": "^2.0.4",
@@ -77,8 +78,7 @@
     "@types/react": "19.0.10",
     "eslint": "^9.22.0",
     "prettier": "^3.5.3",
-    "typescript": "^5.8.2",
-    "winston": "^3.18.3"
+    "typescript": "^5.8.2"
   },
   "scripts": {
     "build": "ray build",

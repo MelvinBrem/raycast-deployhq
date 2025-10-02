@@ -1,6 +1,0 @@
-# Misc
-- [] Implement caching using the Etag response header as an content identifier
-
-# Search Projects
-- [] Add searchProjects action to get that projects servers and open them in browser
-- [] Actually use the defaultAction preference to define the default action
